@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import Button from '@material-ui/core/Button'
+import axios from 'axios'
 
 const styles = theme => ({
   applyRoot: {
@@ -27,6 +28,40 @@ const styles = theme => ({
 })
 
 class Apply extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      fName: '',
+      lName: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: ''
+    }
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
+  async handleSubmit(e) {
+    e.preventDefault()
+
+    const { fName, lName, address, city, state, zip } = this.state
+
+    const form = await axios.post('https://alex-and-eddie-server.herokuapp.com/api/form', {
+      fName,
+      lName,
+      address,
+      city,
+      state,
+      zip
+    })
+  }
 
   render() {
     const { classes } = this.props
@@ -42,86 +77,84 @@ class Apply extends Component {
                     Apply Now
                   </Typography>
                   <Grid container spacing={3}>
+
                     <Grid item xs={12} sm={6}>
                       <TextField
                         required
-                        id="firstName"
-                        name="firstName"
+                        id="fName"
+                        name="fName"
                         label="First name"
                         fullWidth
+                        onChange={this.handleChange}
                       />
                     </Grid>
+
                     <Grid item xs={12} sm={6}>
                       <TextField
                         required
-                        id="lastName"
-                        name="lastName"
+                        id="lName"
+                        name="lName"
                         label="Last name"
                         fullWidth
-                        autoComplete="lname"
+                        onChange={this.handleChange}
                       />
                     </Grid>
+
                     <Grid item xs={12}>
                       <TextField
                         required
-                        id="address1"
-                        name="address1"
+                        id="address"
+                        name="address"
                         label="Address line 1"
                         fullWidth
-                        autoComplete="billing address-line1"
+                        onChange={this.handleChange}
                       />
                     </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        id="address2"
-                        name="address2"
-                        label="Address line 2"
-                        fullWidth
-                        autoComplete="billing address-line2"
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
+
+                    <Grid item xs={12} sm={4}>
                       <TextField
                         required
                         id="city"
                         name="city"
                         label="City"
                         fullWidth
-                        autoComplete="billing address-level2"
+                        onChange={this.handleChange}
                       />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField id="state" name="state" label="State/Province/Region" fullWidth />
+
+                    <Grid item xs={12} sm={4}>
+                      <TextField
+                        required
+                        id="state"
+                        name="state"
+                        label="State/Province/Region"
+                        fullWidth
+                        onChange={this.handleChange}
+                      />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+
+                    <Grid item xs={12} sm={4}>
                       <TextField
                         required
                         id="zip"
                         name="zip"
                         label="Zip / Postal code"
                         fullWidth
-                        autoComplete="billing postal-code"
+                        onChange={this.handleChange}
                       />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        required
-                        id="country"
-                        name="country"
-                        label="Country"
-                        fullWidth
-                        autoComplete="billing country"
-                      />
-                    </Grid>
+
                     {/* <Grid item xs={12}>
                       <FormControlLabel
                         control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
                         label="Use this address for payment details"
                       />
                     </Grid> */}
+
                     <Grid item xs={12}>
-                      <Button className={classes.submitButton}>Submit</Button>
+                      <Button onClick={this.handleSubmit} className={classes.submitButton}>Submit</Button>
                     </Grid>
+
                   </Grid>
                 </React.Fragment>
               </Paper>
