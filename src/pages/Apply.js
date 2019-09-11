@@ -4,8 +4,8 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
+// import FormControlLabel from '@material-ui/core/FormControlLabel'
+// import Checkbox from '@material-ui/core/Checkbox'
 import Button from '@material-ui/core/Button'
 import axios from 'axios'
 
@@ -60,6 +60,18 @@ class Apply extends Component {
       city,
       state,
       zip
+    })
+
+    // ES Lint Purposes
+    console.log(form)
+
+    this.setState({
+      fName: '',
+      lName: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: ''
     })
   }
 
