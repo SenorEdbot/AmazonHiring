@@ -132,7 +132,8 @@ class Navbar extends Component {
     this.setState({
       fullName: '',
       phone: '',
-      bestTime: ''
+      bestTime: '',
+      open: false
     })
   }
   
@@ -185,8 +186,8 @@ class Navbar extends Component {
                   <Grid item xs={12}>
                     <TextField
                       required
-                      id="phoneNumber"
-                      name="phoneNumber"
+                      id="phone"
+                      name="phone"
                       label="Phone Number"
                       variant="outlined"
                       onChange={this.handleChange}
