@@ -36,7 +36,7 @@ class WhatSection extends Component {
         <div className={classes.container}>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <img src="../assets/images/amazonVan.png" alt="Amazon Van" className={classes.articlePhoto} />
+              <img src="../assets/images/vehicle.png" alt="Amazon Van" className={classes.articlePhoto} />
             </Grid>
             <Grid item xs={6}>
               <Typography className={classes.titleType} variant='h5'>
